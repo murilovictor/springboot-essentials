@@ -33,6 +33,11 @@ public class StudentController {
         return new ResponseEntity<>(student, HttpStatus.OK);
     }
 
+    @GetMapping(path = "/findByName/{name}")
+    public ResponseEntity<Student> getStudentByName(@PathVariable String name){
+        return new ResponseEntity<>(repository.findByNameIgnoreCaseContaining(name), HttpStatus.OK);
+    }
+
     @PostMapping
     public ResponseEntity<Student> save(@RequestBody Student student) {
         return new ResponseEntity<>(repository.save(student), HttpStatus.CREATED);
@@ -48,3 +53,8 @@ public class StudentController {
         repository.deleteById(id);
     }
 }
+
+
+
+
+//PAROU NA AULA 9 - Iniciar aula 10

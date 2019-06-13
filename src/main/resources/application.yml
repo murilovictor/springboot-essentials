@@ -14,6 +14,6 @@ spring:
         dialect: org.hibernate.dialect.MySQL8Dialect
 
   datasource:
-    url:  jdbc:mysql://localhost:3306/db_microservices?allowPublicKeyRetrieval=true&sslMode=DISABLED
+    url:  jdbc:mysql://localhost:3306/db_essentials?allowPublicKeyRetrieval=true&sslMode=DISABLED
     username: root
     password: root
