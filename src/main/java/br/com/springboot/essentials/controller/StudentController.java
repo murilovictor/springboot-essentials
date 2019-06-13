@@ -1,5 +1,6 @@
 package br.com.springboot.essentials.controller;
 
+import br.com.springboot.essentials.error.ResourceNotFoundException;
 import br.com.springboot.essentials.model.Student;
 import br.com.springboot.essentials.repository.StudentRepository;
 import lombok.RequiredArgsConstructor;
@@ -29,6 +30,7 @@ public class StudentController {
 
     @GetMapping(path = "/{id}")
     public ResponseEntity<Optional<Student>> getStudentById(@PathVariable Long id) {
+        verifyIfStudentExists(id);
         Optional<Student> student = repository.findById(id);
         return new ResponseEntity<>(student, HttpStatus.OK);
     }
@@ -45,16 +47,18 @@ public class StudentController {
 
     @PutMapping
     public ResponseEntity<Student> update(@RequestBody Student student){
+        verifyIfStudentExists(student.getId());
         return new ResponseEntity<>(repository.save(student), HttpStatus.OK);
     }
 
     @DeleteMapping("/{id}")
     public void delete (@PathVariable Long id){
+        verifyIfStudentExists(id);
         repository.deleteById(id);
     }
+
+    private void verifyIfStudentExists(Long id){
+        if (!repository.findById(id).isPresent())
+            throw new ResourceNotFoundException("Student Not Found for ID: " + id);
+    }
 }
-
-
-
-
-//PAROU NA AULA 9 - Iniciar aula 10
