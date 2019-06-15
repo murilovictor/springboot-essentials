@@ -6,6 +6,7 @@ import br.com.springboot.essentials.repository.StudentRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -25,8 +26,8 @@ public class StudentController {
     private final StudentRepository repository;
 
     @GetMapping
-    public ResponseEntity<Iterable<Student>> listAllStudents() {
-        return new ResponseEntity<>(repository.findAll(), HttpStatus.OK);
+    public ResponseEntity<Iterable<Student>> listAllStudents(Pageable pageable) {
+        return new ResponseEntity<>(repository.findAll(pageable), HttpStatus.OK);
     }
 
     @GetMapping(path = "/{id}")
