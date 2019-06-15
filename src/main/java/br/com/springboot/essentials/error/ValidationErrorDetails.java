@@ -7,7 +7,7 @@ import lombok.Getter;
  * @author Murilo Victor on 14/06/2019
  */
 @Getter
-public class ValidationErrorDetails extends ErrorDetail{
+public class ValidationErrorDetails extends ErrorDetails {
 
     private String field;
     private String fieldMessage;

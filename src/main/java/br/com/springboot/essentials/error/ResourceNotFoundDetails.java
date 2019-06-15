@@ -8,7 +8,7 @@ import lombok.Getter;
  */
 
 @Getter
-public class ResourceNotFoundDetails extends ErrorDetail{
+public class ResourceNotFoundDetails extends ErrorDetails {
 
     @Builder
     public ResourceNotFoundDetails(String title, int status, String detail, long timestamp, String developerMessage) {
