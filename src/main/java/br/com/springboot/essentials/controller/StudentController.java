@@ -10,6 +10,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.Optional;
 
 /**
@@ -41,7 +42,7 @@ public class StudentController {
     }
 
     @PostMapping
-    public ResponseEntity<Student> save(@RequestBody Student student) {
+    public ResponseEntity<Student> save(@Valid @RequestBody Student student) {
         return new ResponseEntity<>(repository.save(student), HttpStatus.CREATED);
     }
 

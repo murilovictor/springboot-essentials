@@ -7,14 +7,11 @@ import lombok.Getter;
  * @author Murilo Victor on 12/06/2019
  */
 
-@Builder
 @Getter
-public class ResourceNotFoundDetails {
+public class ResourceNotFoundDetails extends ErrorDetail{
 
-    private String title;
-    private int status;
-    private String detail;
-    private long timestamp;
-    private String developerMessage;
-
+    @Builder
+    public ResourceNotFoundDetails(String title, int status, String detail, long timestamp, String developerMessage) {
+        super(title, status, detail, timestamp, developerMessage);
+    }
 }
