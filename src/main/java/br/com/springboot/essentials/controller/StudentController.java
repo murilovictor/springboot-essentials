@@ -30,7 +30,7 @@ public class StudentController {
 
     @GetMapping("protected/students")
     public ResponseEntity<Iterable<Student>> listAllStudents(Pageable pageable) {
-        return new ResponseEntity<>(repository.findAll(pageable), HttpStatus.OK);
+        return new ResponseEntity<>(repository.findAll(), HttpStatus.OK);
     }
 
     @GetMapping(path = "protected/students/{id}")
