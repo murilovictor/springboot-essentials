@@ -21,19 +21,19 @@ import java.util.Optional;
  * @author Murilo Victor on 20/05/2019
  */
 @RestController
-@RequestMapping("students")
+@RequestMapping("v1/")
 @Slf4j
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
 public class StudentController {
 
     private final StudentRepository repository;
 
-    @GetMapping
+    @GetMapping("protected/students")
     public ResponseEntity<Iterable<Student>> listAllStudents(Pageable pageable) {
         return new ResponseEntity<>(repository.findAll(pageable), HttpStatus.OK);
     }
 
-    @GetMapping(path = "/{id}")
+    @GetMapping(path = "protected/students/{id}")
     public ResponseEntity<Optional<Student>> getStudentById(@PathVariable Long id,
                                                             @AuthenticationPrincipal UserDetails userDetails) {
         System.out.println(userDetails);
@@ -43,24 +43,24 @@ public class StudentController {
         return new ResponseEntity<>(student, HttpStatus.OK);
     }
 
-    @GetMapping(path = "/findByName/{name}")
+    @GetMapping(path = "protected/students/findByName/{name}")
     public ResponseEntity<Student> getStudentByName(@PathVariable String name){
         return new ResponseEntity<>(repository.findByNameIgnoreCaseContaining(name), HttpStatus.OK);
     }
 
-    @PostMapping
+    @PostMapping("admin/students")
     public ResponseEntity<Student> save(@Valid @RequestBody Student student) {
         return new ResponseEntity<>(repository.save(student), HttpStatus.CREATED);
     }
 
-    @PutMapping
+    @PutMapping("admin/students")
     public ResponseEntity<Student> update(@RequestBody Student student){
         verifyIfStudentExists(student.getId());
         return new ResponseEntity<>(repository.save(student), HttpStatus.OK);
     }
 
-    @PreAuthorize("hasRole('ADMIN')")
-    @DeleteMapping("/{id}")
+//    @PreAuthorize("hasRole('ADMIN')")
+    @DeleteMapping("admin/students/{id}")
     public void delete (@PathVariable Long id){
         verifyIfStudentExists(id);
         repository.deleteById(id);
