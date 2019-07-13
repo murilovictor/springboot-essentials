@@ -6,6 +6,7 @@ import br.com.springboot.essentials.repository.StudentRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -15,6 +16,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.List;
 import java.util.Optional;
 
 /**
@@ -30,7 +32,7 @@ public class StudentController {
 
     @GetMapping("protected/students")
     public ResponseEntity<Iterable<Student>> listAllStudents(Pageable pageable) {
-        return new ResponseEntity<>(repository.findAll(), HttpStatus.OK);
+        return new ResponseEntity<>(repository.findAll(pageable), HttpStatus.OK);
     }
 
     @GetMapping(path = "protected/students/{id}")
@@ -46,6 +48,11 @@ public class StudentController {
     @GetMapping(path = "protected/students/findByName/{name}")
     public ResponseEntity<Student> getStudentByName(@PathVariable String name){
         return new ResponseEntity<>(repository.findByNameIgnoreCaseContaining(name), HttpStatus.OK);
+    }
+
+    @GetMapping(path = "protected/students/findByNameWithPageable/{name}")
+    public ResponseEntity<List<Student>> getStudentByNameWithPageable(@PathVariable String name, Pageable pageable){
+        return new ResponseEntity<>(repository.findByNameIgnoreCaseContaining(name, pageable), HttpStatus.OK);
     }
 
     @PostMapping("admin/students")

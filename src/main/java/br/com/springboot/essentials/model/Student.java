@@ -18,7 +18,6 @@ import javax.validation.constraints.NotEmpty;
 @Entity
 @Getter
 @Setter
-@NoArgsConstructor
 @ToString
 public class Student implements AbstractEntity{
     @Id
@@ -30,4 +29,13 @@ public class Student implements AbstractEntity{
     @Email
     private String email;
     private int age;
+
+    public Student(@NotEmpty String name, @NotEmpty @Email String email, int age) {
+        this.name = name;
+        this.email = email;
+        this.age = age;
+    }
+
+    public Student() {
+    }
 }

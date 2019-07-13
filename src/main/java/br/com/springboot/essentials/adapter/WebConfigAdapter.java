@@ -17,7 +17,7 @@ public class WebConfigAdapter implements WebMvcConfigurer {
     @Override
     public void addArgumentResolvers(List<HandlerMethodArgumentResolver> resolvers) {
         PageableHandlerMethodArgumentResolver argumentResolver = new PageableHandlerMethodArgumentResolver();
-        argumentResolver.setFallbackPageable(PageRequest.of(1,5));
+        //argumentResolver.setFallbackPageable(PageRequest.of(1,5));
         resolvers.add(argumentResolver);
     }
 }
