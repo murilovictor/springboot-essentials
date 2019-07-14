@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "eab99d3d-749d-40a4-a28f-89f8b5667021",
+		"_postman_id": "6a0fb58b-daa0-49c1-b96c-8315cea260c2",
 		"name": "Springboot-Essentials",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -11,17 +11,139 @@
 				{
 					"name": "GET Students",
 					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "username",
+									"value": "MuriloUser",
+									"type": "string"
+								},
+								{
+									"key": "password",
+									"value": "murilo",
+									"type": "string"
+								}
+							]
+						},
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8080/students",
+							"raw": "http://localhost:8080/v1/protected/students",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
 							"port": "8080",
 							"path": [
+								"v1",
+								"protected",
 								"students"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET Students Pagination",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "username",
+									"value": "MuriloAdmin",
+									"type": "string"
+								},
+								{
+									"key": "password",
+									"value": "murilo",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{localhost}}/v1/protected/students?page=1&size=2",
+							"host": [
+								"{{localhost}}"
+							],
+							"path": [
+								"v1",
+								"protected",
+								"students"
+							],
+							"query": [
+								{
+									"key": "sort",
+									"value": "id,desc",
+									"disabled": true
+								},
+								{
+									"key": "sort",
+									"value": "email,asc",
+									"disabled": true
+								},
+								{
+									"key": "page",
+									"value": "1"
+								},
+								{
+									"key": "size",
+									"value": "2"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET Students By name With Pageable",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "username",
+									"value": "MuriloAdmin",
+									"type": "string"
+								},
+								{
+									"key": "password",
+									"value": "murilo",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{localhost}}/v1/protected/students/findByNameWithPageable/Murilo?sort=name,desc&size=2",
+							"host": [
+								"{{localhost}}"
+							],
+							"path": [
+								"v1",
+								"protected",
+								"students",
+								"findByNameWithPageable",
+								"Murilo"
+							],
+							"query": [
+								{
+									"key": "sort",
+									"value": "id,asc",
+									"disabled": true
+								},
+								{
+									"key": "sort",
+									"value": "name,desc"
+								},
+								{
+									"key": "size",
+									"value": "2"
+								}
 							]
 						}
 					},
@@ -33,7 +155,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8080/students/1",
+							"raw": "http://localhost:8080/students/50",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -41,7 +163,7 @@
 							"port": "8080",
 							"path": [
 								"students",
-								"1"
+								"50"
 							]
 						},
 						"description": "Find Student By Id"
@@ -54,16 +176,18 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8080/students/findByName/MuriloVictor",
+							"raw": "http://localhost:8080/v1/protected/students/findByName/MuriloVictorbr9",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
 							"port": "8080",
 							"path": [
+								"v1",
+								"protected",
 								"students",
 								"findByName",
-								"MuriloVictor"
+								"MuriloVictorbr9"
 							]
 						},
 						"description": "Find Student By Id"
@@ -73,18 +197,35 @@
 				{
 					"name": "DELETE Student By Id",
 					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "username",
+									"value": "MuriloAdmin",
+									"type": "string"
+								},
+								{
+									"key": "password",
+									"value": "murilo",
+									"type": "string"
+								}
+							]
+						},
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8080/students/5",
+							"raw": "http://localhost:8080/v1/admin/students/7",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
 							"port": "8080",
 							"path": [
+								"v1",
+								"admin",
 								"students",
-								"5"
+								"7"
 							]
 						},
 						"description": "Find Student By Id"
@@ -105,7 +246,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\t\"name\": \"Murilo Moura Victor\",\n\t\"age\": 26\n}"
+							"raw": "{\n\t\"name\": \"\",\n\t\"age\": 26\n}"
 						},
 						"url": {
 							"raw": "http://localhost:8080/students",
